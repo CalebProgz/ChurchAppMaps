@@ -1,7 +1,7 @@
 class AppConstants {
   // API Configuration
   static const String apiBaseUrl = 'https://api.example.com';
-  static const String googleMapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY_HERE';
+  static const String googleMapsApiKey = 'AIzaSyCaxdsihSb9imS2V4DNtqXCYij0hI9PRIE';
   
   // App Configuration
   static const String appName = 'Church Finder';

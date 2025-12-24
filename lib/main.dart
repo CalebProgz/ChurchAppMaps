@@ -15,7 +15,6 @@ class ChurchApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: true,
-        fontFamily: 'Poppins',
       ),
       home: const HomeScreen(),
     );
