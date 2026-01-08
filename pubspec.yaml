@@ -16,9 +16,9 @@ dependencies:
   provider: ^6.0.0
   
   # Maps & Location
-  google_maps_flutter: ^2.5.0
-  geolocator: ^9.0.2
-  geocoding: ^2.1.1
+  google_maps_flutter: ^2.10.0
+  geolocator: ^10.1.0
+  geocoding: ^2.2.0
   
   # Networking & API
   http: ^1.1.0

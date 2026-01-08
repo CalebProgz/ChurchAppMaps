@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/map_screen.dart';
+import 'screens/main_screen.dart';
 
 void main() {
   runApp(const ChurchApp());
@@ -12,11 +12,12 @@ class ChurchApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Church Finder',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const MapScreen(),
+      home: const MainScreen(),
     );
   }
 }

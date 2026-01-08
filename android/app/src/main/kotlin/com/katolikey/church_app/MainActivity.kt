@@ -1,4 +1,4 @@
-package com.katolikey.church_app_temp
+package com.katolikey.church_app
 
 import io.flutter.embedding.android.FlutterActivity
 
