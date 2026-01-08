@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/map_screen.dart';
 
 void main() {
   runApp(const ChurchApp());
@@ -16,7 +16,7 @@ class ChurchApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const MapScreen(),
     );
   }
 }
