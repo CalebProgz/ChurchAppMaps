@@ -2,6 +2,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 
 class LocationService {
+  // Cached location to avoid repeated GPS requests
+  static Position? _cachedLocation;
+  static DateTime? _lastLocationUpdate;
+  static const Duration _cacheValidDuration = Duration(minutes: 5);
+
   /// Request location permission from the user
   static Future<bool> requestLocationPermission() async {
     final permission = await Geolocator.checkPermission();
@@ -13,20 +18,65 @@ class LocationService {
         permission == LocationPermission.always;
   }
 
-  /// Get current user location
-  static Future<Position?> getCurrentLocation() async {
+  /// Get current user location with caching
+  static Future<Position?> getCurrentLocation(
+      {bool forceRefresh = false}) async {
     try {
+      // Check if we have a valid cached location
+      if (!forceRefresh &&
+          _cachedLocation != null &&
+          _lastLocationUpdate != null) {
+        final timeSinceLastUpdate =
+            DateTime.now().difference(_lastLocationUpdate!);
+        if (timeSinceLastUpdate < _cacheValidDuration) {
+          return _cachedLocation;
+        }
+      }
+
       final hasPermission = await requestLocationPermission();
       if (!hasPermission) {
-        return null;
+        return _cachedLocation; // Return cached if available
       }
-      return await Geolocator.getCurrentPosition(
+
+      final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
+
+      // Cache the new location
+      _cachedLocation = position;
+      _lastLocationUpdate = DateTime.now();
+
+      return position;
     } catch (e) {
       print('Error getting location: $e');
-      return null;
+      return _cachedLocation; // Return cached if available
     }
+  }
+
+  /// Get cached location if available
+  static Position? getCachedLocation() {
+    return _cachedLocation;
+  }
+
+  /// Manually cache a location (useful for real-time updates)
+  static void cacheLocation(Position position) {
+    _cachedLocation = position;
+    _lastLocationUpdate = DateTime.now();
+  }
+
+  /// Clear cached location
+  static void clearCache() {
+    _cachedLocation = null;
+    _lastLocationUpdate = null;
+  }
+
+  /// Check if cached location is still valid
+  static bool isCacheValid() {
+    if (_cachedLocation == null || _lastLocationUpdate == null) {
+      return false;
+    }
+    final timeSinceLastUpdate = DateTime.now().difference(_lastLocationUpdate!);
+    return timeSinceLastUpdate < _cacheValidDuration;
   }
 
   /// Get place name from coordinates
@@ -45,7 +95,8 @@ class LocationService {
   }
 
   /// Calculate distance between two coordinates in kilometers
-  static double calculateDistance(double lat1, double lng1, double lat2, double lng2) {
+  static double calculateDistance(
+      double lat1, double lng1, double lat2, double lng2) {
     return Geolocator.distanceBetween(lat1, lng1, lat2, lng2) / 1000;
   }
 
