@@ -451,7 +451,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Start Navigation Button (shown when not started)
                     if (!_isNavigationStarted && !_hasArrived) ...[
                       SizedBox(
@@ -485,24 +485,24 @@ class _NavigationScreenState extends State<NavigationScreen> {
                       decoration: BoxDecoration(
                         color: _hasArrived
                             ? Colors.green.shade100
-                            : _isNavigationStarted 
-                              ? Colors.blue.shade100
-                              : Colors.grey.shade100,
+                            : _isNavigationStarted
+                                ? Colors.blue.shade100
+                                : Colors.grey.shade100,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
                         children: [
                           Icon(
-                            _hasArrived 
-                              ? Icons.check_circle 
-                              : _isNavigationStarted 
-                                ? Icons.navigation 
-                                : Icons.location_on,
-                            color: _hasArrived 
-                              ? Colors.green 
-                              : _isNavigationStarted 
-                                ? Colors.blue
-                                : Colors.grey,
+                            _hasArrived
+                                ? Icons.check_circle
+                                : _isNavigationStarted
+                                    ? Icons.navigation
+                                    : Icons.location_on,
+                            color: _hasArrived
+                                ? Colors.green
+                                : _isNavigationStarted
+                                    ? Colors.blue
+                                    : Colors.grey,
                           ),
                           const SizedBox(width: 8),
                           Text(
@@ -510,9 +510,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
                             style: TextStyle(
                               color: _hasArrived
                                   ? Colors.green.shade700
-                                  : _isNavigationStarted 
-                                    ? Colors.blue.shade700
-                                    : Colors.grey.shade700,
+                                  : _isNavigationStarted
+                                      ? Colors.blue.shade700
+                                      : Colors.grey.shade700,
                               fontWeight: FontWeight.w600,
                             ),
                           ),

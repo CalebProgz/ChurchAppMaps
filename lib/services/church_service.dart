@@ -106,17 +106,17 @@ class ChurchService {
           }).where((church) {
             // Filter to only include results that are actually churches
             final name = church.name.toLowerCase();
-            return name.contains('church') || 
-                   name.contains('cathedral') || 
-                   name.contains('chapel') || 
-                   name.contains('parish') ||
-                   name.contains('basilica') ||
-                   name.contains('presbyterian') ||
-                   name.contains('pcea') ||
-                   name.contains('methodist') ||
-                   name.contains('baptist') ||
-                   name.contains('anglican') ||
-                   name.contains('pentecostal');
+            return name.contains('church') ||
+                name.contains('cathedral') ||
+                name.contains('chapel') ||
+                name.contains('parish') ||
+                name.contains('basilica') ||
+                name.contains('presbyterian') ||
+                name.contains('pcea') ||
+                name.contains('methodist') ||
+                name.contains('baptist') ||
+                name.contains('anglican') ||
+                name.contains('pentecostal');
           }).toList();
         }
       }

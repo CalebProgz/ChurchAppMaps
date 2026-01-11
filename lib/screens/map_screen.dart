@@ -187,7 +187,7 @@ class _MapScreenState extends State<MapScreen> {
     if (_mapController != null) {
       // Calculate bounds to include marker and space for popup
       final markerPosition = LatLng(church.latitude, church.longitude);
-      
+
       // Adjust camera to show marker with space for popup
       _mapController!.animateCamera(
         CameraUpdate.newCameraPosition(
@@ -274,14 +274,15 @@ class _MapScreenState extends State<MapScreen> {
   void _onCameraMove(CameraPosition position) {
     // Auto-dismiss popup when user scrolls away from selected church
     if (_selectedChurch != null) {
-      final churchLatLng = LatLng(_selectedChurch!.latitude, _selectedChurch!.longitude);
+      final churchLatLng =
+          LatLng(_selectedChurch!.latitude, _selectedChurch!.longitude);
       final cameraLatLng = position.target;
-      
+
       // Calculate distance between camera center and selected church
       const double threshold = 0.01; // Roughly 1km threshold
-      final distance = (churchLatLng.latitude - cameraLatLng.latitude).abs() + 
-                      (churchLatLng.longitude - cameraLatLng.longitude).abs();
-      
+      final distance = (churchLatLng.latitude - cameraLatLng.latitude).abs() +
+          (churchLatLng.longitude - cameraLatLng.longitude).abs();
+
       if (distance > threshold) {
         setState(() {
           _selectedChurch = null;
@@ -422,7 +423,8 @@ class _MapScreenState extends State<MapScreen> {
                     children: [
                       // Popup with pointer
                       Container(
-                        margin: const EdgeInsets.only(top: 15), // More space for visible pointer
+                        margin: const EdgeInsets.only(
+                            top: 15), // More space for visible pointer
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
@@ -438,7 +440,8 @@ class _MapScreenState extends State<MapScreen> {
                       ),
                       // Pointer triangle pointing UP to marker - more visible
                       Positioned(
-                        top: -5, // Slightly outside the container for better visibility
+                        top:
+                            -5, // Slightly outside the container for better visibility
                         left: 0,
                         right: 0,
                         child: Center(
@@ -454,7 +457,8 @@ class _MapScreenState extends State<MapScreen> {
                             ),
                             child: CustomPaint(
                               painter: TrianglePainter(pointingUp: true),
-                              size: const Size(24, 12), // Larger for better visibility
+                              size: const Size(
+                                  24, 12), // Larger for better visibility
                             ),
                           ),
                         ),
@@ -840,9 +844,9 @@ class _MapScreenState extends State<MapScreen> {
 // Custom painter for triangle pointer
 class TrianglePainter extends CustomPainter {
   final bool pointingUp;
-  
+
   const TrianglePainter({this.pointingUp = false});
-  
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
@@ -850,7 +854,7 @@ class TrianglePainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final path = Path();
-    
+
     if (pointingUp) {
       // Triangle pointing up
       path.moveTo(size.width / 2, 0); // Top point
